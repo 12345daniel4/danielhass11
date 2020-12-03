@@ -1,0 +1,8 @@
+void loop() {
+   if (digitalRead(7) == HIGH) {
+      while (digitalRead(7) == HIGH) {
+         Keyboard.press('w');
+      }
+      Keyboard.release('w');
+   }//if
+}//loop
