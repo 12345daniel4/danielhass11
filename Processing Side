@@ -1,3 +1,7 @@
+import processing.serial.*; //import the Serial library
+Serial myPort;
+
+
 int xball;
 int yball;
 
