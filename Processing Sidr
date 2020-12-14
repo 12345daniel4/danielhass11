@@ -1,0 +1,69 @@
+int xball;
+int yball;
+
+int lengthsnake = 2;
+int maxsnake = 100;
+int [] snakex = new int [maxsnake];
+int [] snakey = new int [maxsnake];
+
+xjoy = map(0,1023,-1,1);
+yjoy = map(0,1023,-1,1);
+
+
+
+
+void setup() {
+  myPort = new Serial(this, Serial.list()[0], 9600);
+  myPort.bufferUntil('\n'); 
+
+  size(600, 600);
+  rectMode(CENTER);
+  xball = int(random(0, 500)) ;
+  yball = int(random(0, 500));
+}
+
+// drawing loop
+void draw() {
+  smooth();
+  delay(20);
+  background (0);
+print(xjoy);
+print(yjoy);
+
+  fill(255);
+  ellipse(xball, yball, 15, 15);
+
+
+
+  if (( xjoy  > xball - 17)&&( xjoy < xball +17 )) {
+    if (( yjoy  > yball - 17)&&( yjoy < yball +17 )) {
+      yball = int(random(0, 500)) ;
+      xball = int(random(0, 500)) ;
+      lengthsnake = lengthsnake +1;
+    }
+  }
+
+
+  for (int i = lengthsnake; i>0; i--) {
+    snakex[i] = snakex [i-1];
+    snakey[i] = snakey [i-1];
+  }
+  snakex [ 0 ] = xjoy;
+  snakey [ 0 ] = yjoy;
+  for (int i = 1; i<lengthsnake; i++) {
+    fill(255);
+    rect(snakex[i], snakey[i], 20, 20);
+    
+  }
+}
+
+void serialEvent( Serial myPort) {
+  val = myPort.readStringUntil('\n');
+  if (val != null) {
+    val = trim(val);
+    int[] vals = int(splitTokens(val, ","));
+    xjoy = vals[0];
+    yjoy = vals[1] ;
+    bjoy = vals[2];
+  }
+}
