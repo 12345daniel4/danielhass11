@@ -1,7 +1,15 @@
 import processing.serial.*; //import the Serial library
 Serial myPort;
 
+int xjoy;
+int yjoy;
+int bjoy;
+String portName;
+String val;
 
+int x;
+int y;
+int speed = 10;
 int xball;
 int yball;
 
